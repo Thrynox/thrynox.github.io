@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thrynox's Portfolio</title>
+    <meta name="color-scheme" content="light only" />
+    <meta
+      name="description"
+      content="Heyo! I'm Thrynox — a Minecraft plugin developer crafting custom experiences in Java and Kotlin alongside Post-Processing & Core Shaders."
+    />
+    <meta property="og:site_name" content="Thrynox's Portfolio" />
+    <meta property="og:title" content="Thrynox's Portfolio" />
+    <meta
+      property="og:description"
+      content="Heyo! I'm Thrynox — a Minecraft plugin developer crafting custom experiences in Java and Kotlin alongside Post-Processing & Core Shaders."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="./assets/avatar.png" />
+    <link rel="apple-touch-icon" href="./assets/avatar.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:ital,wght@0,300;0,500;1,300&family=Manrope:ital,wght@0,400;1,400"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      :root { --viewport-height: 100vh; }
+      html { font-size: 17pt; scroll-behavior: smooth; }
+      body { background-color: #05060f; min-height: var(--viewport-height); min-width: 320px; -webkit-text-size-adjust: none; }
+      body::after { background-color: #161a3b; content: ''; display: block; pointer-events: none; position: fixed; transform: scale(1); z-index: 50; height: 0%; left: 0; bottom: 0; transition: height 2s ease 0s, visibility 2s 0s; visibility: hidden; width: 100%; }
+      body.is-loading::after { height: 100%; visibility: visible; }
+      .site-main { transition: opacity 2s ease 0s, transform 2s ease 0s; }
+      body.is-loading .site-main { opacity: 0; transform: scale(0.97); }
+      @keyframes gentle-float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+      .avatar-float { animation: gentle-float 6s ease-in-out infinite; }
+      .tilt-card { position: relative; transform-style: preserve-3d; transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease; }
+      .tilt-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(79, 123, 255, 0.16), transparent 60%); transition: opacity 0.25s ease; z-index: 1; }
+      .tilt-card:hover::before { opacity: 1; }
+      .showcase-placeholder-bg {
+        background-color: #070917;
+        background-image:
+          radial-gradient(circle at 50% 35%, rgba(59, 130, 246, 0.14), rgba(29, 32, 92, 0.08) 45%, transparent 72%),
+          linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 100% 100%, 2.25rem 2.25rem, 2.25rem 2.25rem;
+      }
+      @keyframes clipboard-dialog-content-copied { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+      dialog.clipboard { --color-background: #0b0d1d; --color-content-background: #121633; --color-content-border: #2a3366; --color-content-text: #f8fafc; --color-text: #7c88b8; --border-radius: 9px; align-items: center; background: transparent; border: 0; display: flex; height: 100%; justify-content: center; max-height: 100%; max-width: 100%; min-height: 0; min-width: 0; padding: 0; width: 100%; position: fixed; inset: 0; margin: 0; }
+      dialog.clipboard:not([open]) { display: none; }
+      dialog.clipboard:focus { outline: none; }
+      dialog.clipboard .wrapper { background: var(--color-background); border: 1px solid rgba(96, 165, 250, 0.22); border-radius: var(--border-radius); box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.55); cursor: pointer; font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif; font-size: 21pt; max-width: calc(100% - 4em); min-width: 20em; opacity: 0; padding: 1.5em; text-align: center; transform: translateY(0.75em); transition: opacity 0.5s ease, transform 0.5s ease; }
+      dialog.clipboard .wrapper::after { color: var(--color-text); content: 'Click to copy'; display: block; font-size: 0.8em; margin-top: 1.5em; }
+      dialog.clipboard .wrapper .content { background-color: var(--color-content-background); border-radius: calc(var(--border-radius) / 3); border: dashed 2px var(--color-content-border); color: var(--color-content-text); overflow-x: auto; overflow-y: hidden; padding: 1.5em; position: relative; user-select: none; white-space: nowrap; width: 100%; margin: 0; }
+      dialog.clipboard .wrapper .content::before { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cline x1='2' y1='2' x2='48' y2='2' stroke='%237c88b8' stroke-width='2' stroke-linecap='square'/%3E%3Cline x1='46' y1='2' x2='48' y2='16' stroke='%237c88b8' stroke-width='2' stroke-linecap='square'/%3E%3Cline x1='2' y1='2' x2='2' y2='48' stroke='%237c88b8' stroke-width='2' stroke-linecap='square'/%3E%3Cline x1='2' y1='48' x2='16' y2='48' stroke='%237c88b8' stroke-width='2' stroke-linecap='square'/%3E%3Crect x='16' y='16' width='46' height='46' fill='none' stroke='%237c88b8' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E"); background-position: center; background-repeat: no-repeat; background-size: contain; content: '\00a0'; display: inline-block; margin-left: -0.5em; margin-right: 0.5em; opacity: 0.55; width: 1.25em; }
+      dialog.clipboard .wrapper .content::after { background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cline x1='7' y1='36' x2='26' y2='55' stroke='%2360a5fa' stroke-width='5' stroke-linecap='square'/%3E%3Cline x1='59' y1='13' x2='26' y2='55' stroke='%2360a5fa' stroke-width='5' stroke-linecap='square'/%3E%3C/svg%3E"); background-position: center; background-repeat: no-repeat; background-size: 1.25em; content: ''; font-size: 2em; height: 2em; left: calc(50% - 1em); line-height: 2em; opacity: 0; position: absolute; top: calc(50% - 1em); width: 2em; }
+      dialog.clipboard .wrapper.copied::after { content: 'Copied!' !important; color: #60a5fa; }
+      dialog.clipboard .wrapper.copied .content { animation: clipboard-dialog-content-copied 0.125s ease; color: transparent; }
+      dialog.clipboard .wrapper.copied .content::before { display: none; }
+      dialog.clipboard .wrapper.copied .content::after { animation: clipboard-dialog-content-copied 0.125s ease; opacity: 0.9; }
+      dialog.clipboard::backdrop { background-color: rgba(4, 5, 14, 0.88); opacity: 0; transition: opacity 0.25s ease; }
+      dialog.clipboard .close { -webkit-tap-highlight-color: transparent; background-color: transparent; border: 0; background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cline x1='20' y1='20' x2='44' y2='44' stroke='%23ffffff' stroke-width='1.5'/%3E%3Cline x1='20' y1='44' x2='44' y2='20' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E"); background-position: top 1rem right 1rem; background-repeat: no-repeat; background-size: 3rem; cursor: pointer; display: block; height: 6rem; opacity: 0; position: absolute; right: 0; top: 0; transition: opacity 0.25s ease, transform 0.5s ease; width: 6rem; }
+      dialog.clipboard.active .wrapper { opacity: 1; transform: none; }
+      dialog.clipboard.active .close { opacity: 0.35; }
+      dialog.clipboard.active .close:hover { opacity: 1; }
+      dialog.clipboard.active::backdrop { opacity: 1; transition-delay: 0s; }
+      @media (max-width: 1680px) { html { font-size: 12pt; } }
+      @media (max-width: 980px) { html { font-size: 11pt; } }
+      @media (max-width: 736px) {
+        dialog.clipboard .wrapper { border-radius: 0; font-size: 18pt; max-width: 100%; min-width: 0; width: 100%; }
+        dialog.clipboard .wrapper .content { padding: 1.5em 1.25em; }
+        dialog.clipboard .close { background-position: top 0.5rem right 0.5rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body::after, .site-main, .avatar-float, .tilt-card { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-[#05060f] text-[#9BA3C2] leading-none overflow-x-hidden break-words">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" class="hidden" width="0" height="0">
+      <symbol id="icon-discord" viewBox="0 0 40 40"><path d="M33.2,8.3c-2.5-1.1-5.1-1.9-7.9-2.4c-0.3,0.6-0.7,1.4-1,2c-2.9-0.4-5.8-0.4-8.7,0c-0.3-0.6-0.7-1.4-1-2 c-2.8,0.5-5.4,1.3-7.9,2.4c-5,7.2-6.3,14.2-5.6,21.1c3.3,2.3,6.5,3.8,9.6,4.7c0.8-1,1.5-2.1,2.1-3.3c-1.1-0.4-2.2-0.9-3.2-1.5 c0.3-0.2,0.5-0.4,0.8-0.6c6.3,2.8,13,2.8,19.2,0c0.3,0.2,0.5,0.4,0.8,0.6c-1,0.6-2.1,1.1-3.2,1.5c0.6,1.1,1.3,2.2,2.1,3.3 c3.1-0.9,6.3-2.4,9.6-4.7C39.7,21.4,37.5,14.4,33.2,8.3z M13.7,25.1c-1.9,0-3.4-1.7-3.4-3.7s1.5-3.7,3.4-3.7c1.9,0,3.5,1.7,3.4,3.7 C17.1,23.4,15.6,25.1,13.7,25.1z M26.3,25.1c-1.9,0-3.4-1.7-3.4-3.7s1.5-3.7,3.4-3.7c1.9,0,3.5,1.7,3.4,3.7 C29.7,23.4,28.2,25.1,26.3,25.1z" /></symbol>
+      <symbol id="icon-kofi" viewBox="0 0 40 40"><path d="M31.5,25.6c-.4,1.2-.9,2.4-1.7,3.6-1.8,2.7-5.3,6.2-11.8,6.2h-1.3c-5.3,0-9.4-2.3-11.8-6.5-2.2-3.7-2.4-7.7-2.4-13.1h0c0-5.3,3.2-8.2,7-8.7,2.8-.4,6.4-.4,10.5-.4h0c6.5,0,8.2,0,10.6.3h0c5.6.6,8.9,4.1,8.9,9.1v.6c0,4.7-3.4,8.5-8,8.9ZM36.5,16.1c0-3.7-2.3-5.7-6.4-6.2-2.3-.2-3.6-.3-10.1-.3s-7.5,0-9.8.4c-3.3.5-4.6,2.4-4.6,5.7h0c0,5.2.3,8.5,2,11.6,1.9,3.6,5.4,4.9,9.4,4.9h1.2c5.2,0,7.7-2.5,9.1-4.7.7-1.1,1.3-2.4,1.6-3.9l.2-1h1.4c3.2,0,6-2.6,6-5.9v-.6ZM30.1,19.4c-.6,0-1-.4-1-.8v-4.5c0-.5.4-.8,1-.8,2,0,3.2,1.2,3.2,3.1s-1.1,3.1-3.2,3.1ZM18.8,27.3c-.3.2-.7.3-1.2.3s-.8-.1-1.1-.3c-1.2-.7-3-1.8-4.1-2.9-1.7-1.6-3-3.7-3-6h0c0-2.6,1.8-4.9,4.6-4.9s2.8.8,3.6,2c.8-1.2,2-2,3.6-2,2.8,0,4.7,2.3,4.7,4.9s-1.3,4.4-3,6c-1.1,1.1-2.8,2.2-4,2.9Z" /></symbol>
+      <symbol id="icon-paypal" viewBox="0 0 40 40"><path d="M35.1,20.2c-1.3,5.6-5.5,8.2-11.2,8.8h-0.9c-0.7,0-1.3,0.5-1.4,1.2l-0.1,0.4l-1.1,6.8l-0.1,0.3 c-0.1,0.7-0.7,1.2-1.4,1.2h-4.7L16.6,25h2.9c8,0,13-3.9,14.6-11.2C35.4,15.4,35.6,17.6,35.1,20.2z M32.3,13.1 c-1.4,7.5-6.4,10-12.8,10h-3.2c-0.8,0-1.4,0.6-1.6,1.3l0.1-0.3l-1.7,10.8H6.3c-0.6,0-1-0.5-0.9-1.1L9.9,4.7C10,4,10.7,3.4,11.5,3.4 h11c3.8,0,6.8,0.8,8.4,2.7c1.5,1.7,1.9,3.6,1.5,6.3C32.4,12.4,32.3,12.8,32.3,13.1z" /></symbol>
+    </svg>
+
+    <div class="min-h-screen flex flex-col items-center justify-center overflow-hidden relative z-[2] p-0 md:p-16">
+      <main
+        class="site-main relative z-[1] flex items-center justify-center w-full md:w-auto max-w-full bg-[#05060f] bg-cover bg-center bg-no-repeat text-center"
+        style="background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(36, 40, 128, 0.34), transparent 65%), url('./assets/bg-grid.svg');"
+      >
+        <div class="w-[55rem] max-w-full relative z-[1] px-6 py-14 sm:px-8 sm:py-18 md:px-16 md:py-22 space-y-14 sm:space-y-16 md:space-y-20">
+          <section id="about" class="w-full">
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+              <div class="w-full md:w-[39%] flex flex-col items-center shrink-0">
+                <div data-reveal="fade-up" data-speed="1000" data-intensity="2" data-delay="125" class="avatar-float w-[12.5rem] md:w-full max-w-[19.5rem] aspect-square rounded-full border border-[#4F7BFF]/35 p-3 overflow-hidden shadow-[0_0_52px_rgba(37,99,235,0.2)]">
+                  <img src="./assets/avatar.png" alt="Thrynox character portrait" class="w-full h-full object-cover rounded-full block" />
+                </div>
+              </div>
+              <div class="w-full md:w-[61%] text-center md:text-left space-y-4">
+                <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="uppercase text-[#586085] font-['Inter',sans-serif] tracking-[0.375rem] text-[0.75em] leading-[2.25] font-light m-0">minecraft plugin developer</p>
+                <h1 data-reveal="fade-left" data-speed="1000" data-intensity="2" class="text-[#F8FAFC] font-['Manrope',sans-serif] tracking-[-0.025rem] text-[2.25em] sm:text-[2.75em] leading-[1.35] font-normal m-0">Thrynox</h1>
+                <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="text-[#9BA3C2] font-['Inter',sans-serif] text-[1em] leading-[1.875] font-light m-0">
+                  Heyo! I'm <strong class="font-medium text-[#F8FAFC]">Thrynox</strong>, a Minecraft plugin developer with over
+                  <strong class="font-medium text-[#F8FAFC]">1.5 years of experience</strong> in the development community. I specialize in crafting custom Minecraft experiences using
+                  <strong class="font-medium text-[#F8FAFC]">Java and Kotlin</strong>, alongside Post-Processing &amp; Core Shaders that bring projects to life with stunning visuals and immersive effects. I'm passionate about pushing creative boundaries and turning ambitious ideas into polished, high-quality experiences.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="skills" class="w-full text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-y border-white/[0.085] py-9">
+              <div data-reveal="fade-up" data-speed="900" data-intensity="2" class="tilt-card border border-[#4F7BFF]/20 hover:border-[#4F7BFF]/45 bg-[#070A1B]/75 p-6 flex flex-col gap-2.5 overflow-hidden">
+                <span class="font-['Inter',sans-serif] text-[0.7em] font-light tracking-[0.28rem] uppercase text-[#586085]">01</span>
+                <h2 class="font-['Manrope',sans-serif] text-[1.25em] font-normal text-[#F8FAFC] tracking-[-0.015rem] m-0">Java &amp; Kotlin Plugins</h2>
+                <p class="font-['Inter',sans-serif] text-[0.88em] leading-[1.75] font-light text-[#9BA3C2] m-0">Custom Minecraft gameplay mechanics, packet-driven interactions, and clean, high-TPS server plugins built in Java and Kotlin.</p>
+                <span class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#636C94] mt-auto pt-2">Java · Kotlin · Paper API · Packet Systems</span>
+              </div>
+              <div data-reveal="fade-up" data-speed="900" data-intensity="2" data-delay="120" class="tilt-card border border-[#4F7BFF]/20 hover:border-[#4F7BFF]/45 bg-[#070A1B]/75 p-6 flex flex-col gap-2.5 overflow-hidden">
+                <span class="font-['Inter',sans-serif] text-[0.7em] font-light tracking-[0.28rem] uppercase text-[#586085]">02</span>
+                <h2 class="font-['Manrope',sans-serif] text-[1.25em] font-normal text-[#F8FAFC] tracking-[-0.015rem] m-0">Post-Processing &amp; Core Shaders</h2>
+                <p class="font-['Inter',sans-serif] text-[0.88em] leading-[1.75] font-light text-[#9BA3C2] m-0">Vanilla-compatible GLSL shaders for custom lighting, atmospheric screen effects, and immersive in-game visual storytelling.</p>
+                <span class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#636C94] mt-auto pt-2">Core Shaders · Post-Processing · GLSL · Resource Packs</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="work" class="w-full py-4 flex flex-col items-center text-center space-y-6">
+            <div class="space-y-2">
+              <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="uppercase text-[#586085] font-['Inter',sans-serif] tracking-[0.375rem] text-[0.75em] leading-[2.25] font-light m-0">projects and work</p>
+              <h2 data-reveal="fade-left" data-speed="1000" data-intensity="2" class="text-[#F8FAFC] font-['Manrope',sans-serif] tracking-[-0.025rem] text-[2em] sm:text-[2.625em] leading-[1.5] font-normal m-0">Showcase</h2>
+            </div>
+
+            <!-- Full-width video showcase: one large player per row -->
+            <div class="grid grid-cols-1 gap-8 w-full">
+              <!-- Video Showcase Slot 01 -->
+              <div class="w-full">
+                <div class="relative w-full aspect-video overflow-hidden bg-[#070A1B] border border-[#4F7BFF]/20 hover:border-[#4F7BFF]/45 transition-all">
+                  <video
+                    class="block w-full h-full object-contain bg-[#070A1B]"
+                    controls
+                    preload="metadata"
+                    playsinline
+                    poster="./assets/videos/particle-thumbnail.png"
+                  >
+                    <source src="./assets/videos/particles.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+
+              <!-- Video Showcase Slot 02 -->
+              <div class="w-full">
+                <div class="relative w-full aspect-video overflow-hidden bg-[#070A1B] border border-[#4F7BFF]/20 hover:border-[#4F7BFF]/45 transition-all">
+                  <video
+                    class="block w-full h-full object-contain bg-[#070A1B]"
+                    controls
+                    preload="metadata"
+                    playsinline
+                    poster="./assets/videos/core-thumbnail.png"
+                  >
+                    <source src="./assets/videos/core.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="plugins" class="w-full py-4 flex flex-col items-center text-center space-y-6">
+            <div class="space-y-2">
+              <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="uppercase text-[#586085] font-['Inter',sans-serif] tracking-[0.375rem] text-[0.75em] leading-[2.25] font-light m-0">published resources</p>
+              <h2 data-reveal="fade-left" data-speed="1000" data-intensity="2" class="text-[#F8FAFC] font-['Manrope',sans-serif] tracking-[-0.025rem] text-[2em] sm:text-[2.625em] leading-[1.5] font-normal m-0">Plugins</h2>
+              <p data-reveal="fade-up" data-speed="900" data-intensity="2" class="text-[#9BA3C2] font-['Inter',sans-serif] text-[0.88em] leading-[1.75] font-light max-w-xl mx-auto m-0">A selection of projects and resources I've released.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full text-left">
+              <!-- StrengthSMP Season 5 -->
+              <a
+                href="https://www.spigotmc.org/resources/strengthsmp-season-5.139644/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-reveal="fade-up" data-speed="900" data-intensity="2"
+                class="tilt-card group relative block w-full min-h-[10.5rem] overflow-hidden border border-[#4F7BFF]/20 bg-[#070A1B]/75 p-6 text-left no-underline hover:border-[#4F7BFF]/50 hover:bg-[#0A0E25]/90 transition-all duration-300">
+                <div class="relative z-[2] flex items-center justify-between gap-3 mb-5">
+                  <span class="font-['Inter',sans-serif] text-[0.62em] tracking-[0.2rem] uppercase text-[#586085]">SpigotMC</span>
+                  <span class="inline-flex items-center rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 font-['Inter',sans-serif] text-[0.58em] tracking-[0.12rem] uppercase text-[#93C5FD]">Free</span>
+                </div>
+                <div class="relative z-[2] flex items-end justify-between gap-4">
+                  <div>
+                    <h3 class="font-['Manrope',sans-serif] text-[1.12em] leading-[1.4] font-normal text-[#F8FAFC] m-0">StrengthSMP Season 5</h3>
+                    <p class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#7D85A8] mt-2 mb-0">Minecraft plugin · Season 5</p>
+                  </div>
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-current text-[#7D85A8] group-hover:text-[#93C5FD] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+              </a>
+
+              <!-- AltarSMP Season 1 -->
+              <a
+                href="https://www.spigotmc.org/resources/altarsmp-season-1.137751/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-reveal="fade-up" data-speed="900" data-intensity="2" data-delay="80"
+                class="tilt-card group relative block w-full min-h-[10.5rem] overflow-hidden border border-[#4F7BFF]/20 bg-[#070A1B]/75 p-6 text-left no-underline hover:border-[#4F7BFF]/50 hover:bg-[#0A0E25]/90 transition-all duration-300">
+                <div class="relative z-[2] flex items-center justify-between gap-3 mb-5">
+                  <span class="font-['Inter',sans-serif] text-[0.62em] tracking-[0.2rem] uppercase text-[#586085]">SpigotMC</span>
+                  <span class="inline-flex items-center rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 font-['Inter',sans-serif] text-[0.58em] tracking-[0.12rem] uppercase text-[#93C5FD]">Free</span>
+                </div>
+                <div class="relative z-[2] flex items-end justify-between gap-4">
+                  <div>
+                    <h3 class="font-['Manrope',sans-serif] text-[1.12em] leading-[1.4] font-normal text-[#F8FAFC] m-0">AltarSMP Season 1</h3>
+                    <p class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#7D85A8] mt-2 mb-0">Minecraft plugin · Season 1</p>
+                  </div>
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-current text-[#7D85A8] group-hover:text-[#93C5FD] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+              </a>
+
+              <!-- AltarSMP Season 2 -->
+              <a
+                href="https://www.spigotmc.org/resources/altarsmp-s2.137076/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-reveal="fade-up" data-speed="900" data-intensity="2" data-delay="160"
+                class="tilt-card group relative block w-full min-h-[10.5rem] overflow-hidden border border-[#4F7BFF]/20 bg-[#070A1B]/75 p-6 text-left no-underline hover:border-[#4F7BFF]/50 hover:bg-[#0A0E25]/90 transition-all duration-300">
+                <div class="relative z-[2] flex items-center justify-between gap-3 mb-5">
+                  <span class="font-['Inter',sans-serif] text-[0.62em] tracking-[0.2rem] uppercase text-[#586085]">SpigotMC</span>
+                  <span class="inline-flex items-center rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 font-['Inter',sans-serif] text-[0.58em] tracking-[0.12rem] uppercase text-[#93C5FD]">Free</span>
+                </div>
+                <div class="relative z-[2] flex items-end justify-between gap-4">
+                  <div>
+                    <h3 class="font-['Manrope',sans-serif] text-[1.12em] leading-[1.4] font-normal text-[#F8FAFC] m-0">AltarSMP Season 2</h3>
+                    <p class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#7D85A8] mt-2 mb-0">Minecraft plugin · Season 2</p>
+                  </div>
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-current text-[#7D85A8] group-hover:text-[#93C5FD] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+              </a>
+
+              <!-- Mythos SMP -->
+              <a
+                href="https://builtbybit.com/resources/mythos-smp-abilities-world-events.130927/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-reveal="fade-up" data-speed="900" data-intensity="2" data-delay="240"
+                class="tilt-card group relative block w-full min-h-[10.5rem] overflow-hidden border border-[#4F7BFF]/25 bg-[#090B20]/90 p-6 text-left no-underline hover:border-[#A78BFA]/50 hover:bg-[#0D1029] transition-all duration-300">
+                <div class="relative z-[2] flex items-center justify-between gap-3 mb-5">
+                  <span class="font-['Inter',sans-serif] text-[0.62em] tracking-[0.2rem] uppercase text-[#586085]">BuiltByBit</span>
+                  <span class="inline-flex items-center rounded-full border border-[#A78BFA]/25 bg-[#A78BFA]/[0.08] px-3 py-1 font-['Inter',sans-serif] text-[0.58em] tracking-[0.12rem] uppercase text-[#C4B5FD]">Paid</span>
+                </div>
+                <div class="relative z-[2] flex items-end justify-between gap-4">
+                  <div>
+                    <h3 class="font-['Manrope',sans-serif] text-[1.12em] leading-[1.4] font-normal text-[#F8FAFC] m-0">Mythos SMP</h3>
+                    <p class="font-['Inter',sans-serif] text-[0.72em] leading-[1.6] font-light text-[#7D85A8] mt-2 mb-0">Abilities &amp; World Events</p>
+                  </div>
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-current text-[#7D85A8] group-hover:text-[#C4B5FD] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section id="contact" class="w-full flex justify-center">
+            <div class="max-w-[32rem] w-full text-center space-y-4">
+              <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="uppercase text-[#586085] font-['Inter',sans-serif] tracking-[0.375rem] text-[0.75em] leading-[2.25] font-light m-0">contacts</p>
+              <h2 data-reveal="fade-left" data-speed="1000" data-intensity="2" class="text-[#F8FAFC] font-['Manrope',sans-serif] tracking-[-0.025rem] text-[2em] sm:text-[2.625em] leading-[1.5] font-normal m-0">Contact Me!</h2>
+              <p data-reveal="fade-right" data-speed="1000" data-intensity="2" class="text-[#9BA3C2] font-['Inter',sans-serif] text-[1em] leading-[1.875] font-light m-0">
+                Need a custom Java or Kotlin plugin paired with immersive shaders? Reach out on Discord below to get started.
+              </p>
+              <div data-reveal="fade-up" data-speed="1000" data-intensity="2"
+                  class="pt-2 flex flex-wrap items-center justify-center gap-4">
+
+                <!-- Discord Server Button -->
+                <a
+                  href="https://discord.gg/Bc2QzWBWQz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center h-[3.75rem] px-7 rounded-[2.5rem] bg-[#141A3B] border border-[#4F7BFF]/30 text-[#F8FAFC] font-['Inter',sans-serif] text-[0.75em] font-light uppercase tracking-[0.25rem] cursor-pointer whitespace-nowrap hover:bg-[#2B4CE6] hover:border-[#60A5FA] hover:scale-[0.975] transition-all duration-250 no-underline">
+
+                  <svg class="w-[1.25em] h-full min-w-[18px] fill-current mr-3"
+                      aria-hidden="true">
+                    <use href="#icon-discord"></use>
+                  </svg>
+                  <span>JOIN SERVER</span>
+                </a>
+
+                <!-- Discord Username Button -->
+                <button
+                  type="button"
+                  data-copy="@thrynox"
+                  class="inline-flex items-center justify-center h-[3.75rem] px-7 rounded-[2.5rem] bg-[#080B1C] border border-white/10 text-[#9BA3C2] font-['Inter',sans-serif] text-[0.75em] font-light uppercase tracking-[0.25rem] cursor-pointer whitespace-nowrap hover:bg-[#141A3B] hover:border-[#4F7BFF]/50 hover:text-[#F8FAFC] hover:scale-[0.975] transition-all duration-250">
+
+                  <svg class="w-[1.25em] h-full min-w-[18px] fill-current mr-3"
+                      aria-hidden="true">
+                    <use href="#icon-discord"></use>
+                  </svg>
+                  <span>@thrynox</span>
+                </button>
+
+              </div>
+            </div>
+          </section>
+
+          <hr data-reveal="fade-in" data-speed="1000" data-intensity="5" class="border-0 w-full h-px bg-white/[0.085]" />
+
+          <footer class="font-['Inter',sans-serif] text-[0.72em] font-light tracking-[0.16rem] uppercase text-[#586085] text-center">
+            Thrynox · Java, Kotlin &amp; Shaders
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="clipboard-dialog" class="clipboard">
+      <div class="wrapper"><p class="content">-</p></div>
+      <button type="button" class="close" aria-label="Close dialog"></button>
+    </dialog>
+
+    <script>
+      (() => {
+        document.body.classList.add('is-loading');
+        setTimeout(() => {
+          document.body.classList.remove('is-loading');
+          document.body.classList.add('is-playing');
+          setTimeout(() => {
+            document.body.classList.remove('is-playing');
+            document.body.classList.add('is-ready');
+          }, 2000);
+        }, 100);
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!reducedMotion) {
+          document.querySelectorAll('[data-reveal]').forEach((el) => {
+            const style = el.dataset.reveal || 'fade-up';
+            const intensity = (Number(el.dataset.intensity || '2') / 10) * 1.75 + 0.25;
+            const speed = Number(el.dataset.speed || '1000');
+            const delay = Number(el.dataset.delay || '0');
+            if (style === 'fade-right') { el.style.opacity = '0'; el.style.transform = `translateX(${-1.5 * intensity}rem)`; }
+            else if (style === 'fade-left') { el.style.opacity = '0'; el.style.transform = `translateX(${1.5 * intensity}rem)`; }
+            else if (style === 'fade-up') { el.style.opacity = '0'; el.style.transform = `translateY(${1.5 * intensity}rem)`; }
+            else if (style === 'fade-down') { el.style.opacity = '0'; el.style.transform = `translateY(${-1.5 * intensity}rem)`; }
+            else if (style === 'fade-in') { el.style.opacity = '0'; }
+            else if (style === 'blur-in') { el.style.opacity = '0'; el.style.filter = `blur(${0.25 * intensity}rem)`; }
+
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const d = delay ? ` ${delay / 1000}s` : '';
+                const s = speed / 1000;
+                el.style.transition = style === 'fade-in'
+                  ? `opacity ${s}s ease${d}`
+                  : style === 'blur-in'
+                    ? `opacity ${s}s ease${d}, filter ${s}s ease${d}`
+                    : `opacity ${s}s ease${d}, transform ${s}s ease${d}`;
+                void el.offsetHeight;
+                el.style.opacity = '1';
+                if (style === 'blur-in') el.style.filter = 'none';
+                else if (style !== 'fade-in') el.style.transform = 'none';
+                setTimeout(() => { el.style.transition = ''; }, (speed + delay) * 2);
+                observer.unobserve(el);
+              });
+            }, { threshold: 0.2 });
+            observer.observe(el);
+          });
+
+          if (!window.matchMedia('(pointer: coarse)').matches) {
+            document.querySelectorAll('.tilt-card').forEach((card) => {
+              card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const px = (x / rect.width) * 100;
+                const py = (y / rect.height) * 100;
+                const rotateY = ((x / rect.width) - 0.5) * 4;
+                const rotateX = ((y / rect.height) - 0.5) * -4;
+                card.style.setProperty('--mx', `${px}%`);
+                card.style.setProperty('--my', `${py}%`);
+                card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.008)`;
+              });
+              card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+            });
+          }
+        }
+
+        document.querySelectorAll('[data-placeholder-card]').forEach((card) => {
+          const trigger = card.querySelector('[data-placeholder-trigger]');
+          const note = card.querySelector('[data-placeholder-note]');
+          if (!trigger || !note) return;
+          trigger.addEventListener('click', () => {
+            const expanded = trigger.getAttribute('aria-expanded') === 'true';
+            trigger.setAttribute('aria-expanded', String(!expanded));
+            note.classList.toggle('hidden', expanded);
+          });
+        });
+
+        const dialog = document.getElementById('clipboard-dialog');
+        if (dialog) {
+          const wrapper = dialog.querySelector('.wrapper');
+          const contentEl = dialog.querySelector('.content');
+          const closeBtn = dialog.querySelector('.close');
+          let locked = false;
+          const close = () => {
+            if (locked) return;
+            locked = true;
+            dialog.classList.remove('active');
+            setTimeout(() => { if (dialog.open) dialog.close(); wrapper.classList.remove('copied'); locked = false; }, 750);
+          };
+          const open = (text) => {
+            if (locked) return;
+            locked = true;
+            contentEl.textContent = text;
+            wrapper.classList.remove('copied');
+            if (!dialog.open) dialog.showModal();
+            setTimeout(() => { dialog.classList.add('active'); setTimeout(() => { locked = false; }, 250); }, 0);
+          };
+          document.querySelectorAll('[data-copy]').forEach((el) => {
+            el.addEventListener('click', (e) => { e.preventDefault(); if (el.dataset.copy) open(el.dataset.copy); });
+          });
+          wrapper.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            try { await navigator.clipboard.writeText(contentEl.textContent || ''); } catch {}
+            wrapper.classList.add('copied');
+            setTimeout(close, 500);
+          });
+          dialog.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); close(); });
+          closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+          dialog.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); } });
+        }
+      })();
+    </script>
+  </body>
+</html>
